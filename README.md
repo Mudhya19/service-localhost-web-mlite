@@ -14,6 +14,7 @@ sudo apt update && sudo apt upgrade -y
 
 # Install required PHP extensions and Apache server
 sudo apt install php-mysql
+sudo apt install php-gd
 sudo apt install php8.3-curl
 sudo apt install apache2
 sudo apt install php-mbstring  # or php8.3-mbstring depending on your PHP version
