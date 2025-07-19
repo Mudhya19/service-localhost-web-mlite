@@ -51,6 +51,9 @@ cd /mnt/c/laragon/www/mlite-RSDS
 
 # Start PHP built-in server
 php -S localhost:8000 -t /mnt/c/laragon/www/mlite-RSDS
+
+# Copy project folder in system linux
+cp -r /mnt/c/laragon/www/mlite-master ~/mlite-master
 ```
 
 ---
