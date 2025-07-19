@@ -47,10 +47,10 @@ Navigate to your project directory and launch a PHP development server:
 
 ```bash
 # Navigate to the web project folder (inside Windows directory)
-cd /mnt/c/laragon/www/mlite-RSDS
+cd /mnt/c/laragon/www/mlite-master
 
 # Start PHP built-in server
-php -S localhost:8000 -t /mnt/c/laragon/www/mlite-RSDS
+php -S localhost:8000 -t /mnt/c/laragon/www/mlite-master
 
 # Copy project folder in system linux
 cp -r /mnt/c/laragon/www/mlite-master ~/mlite-master
