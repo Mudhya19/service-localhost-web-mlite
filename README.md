@@ -80,7 +80,10 @@ User=root  # or replace with your Ubuntu/WSL username
 [Install]
 WantedBy=multi-user.target
 ```
-
+Check Logs 
+```
+journalctl -u mlite-server.service -f
+```
 ---
 
 ## 5. Enabling and Managing the Service
