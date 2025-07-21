@@ -52,13 +52,13 @@ Navigate to your project directory and launch a PHP development server:
 
 ```bash
 # Navigate to the web project folder (inside Windows directory)
-cd /mnt/c/laragon/www/mlite-master
+cd /mnt/c/laragon/www/mlite-RSDS
 
 # Start PHP built-in server
-php -S localhost:8000 -t /mnt/c/laragon/www/mlite-master
+php -S localhost:8000 -t /mnt/c/laragon/www/mlite-RSDS
 
 # Copy project folder in system linux
-cp -r /mnt/c/laragon/www/mlite-master ~/mlite-master
+cp -r /mnt/c/laragon/www/mlite-RSDS ~/mlite-RSDS
 ```
 
 ---
@@ -76,21 +76,28 @@ Paste the following content:
 
 ```ini
 [Unit]
-Description=mlite PHP server
+Description=mlite PHP Development Server
 After=network.target
 
 [Service]
-ExecStart=/usr/bin/php -S 0.0.0.0:8000 -t /mnt/c/laragon/www/mlite-RSDS
-WorkingDirectory=/mnt/c/laragon/www/mlite-RSDS
+Type=simple
+ExecStart=/usr/bin/php -S 0.0.0.0:8010 -t /root/mlite-master
+WorkingDirectory=/root/mlite-master
 Restart=always
-User=root  # or replace with your Ubuntu/WSL username
+RestartSec=5
+User=root
+Environment=APP_ENV=production
+
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=mlite
 
 [Install]
 WantedBy=multi-user.target
 ```
 Check Logs 
 ```
-journalctl -u mlite-server.service -f
+journalctl -u mlite.service -f
 ```
 ---
 
@@ -115,14 +122,14 @@ Check the network interface and access the server:
 hostname -I
 
 # Access from browser:
-# http://<IP_WSL>:8000 or http://localhost:8000
+# http://<IP_WSL>:8010 or http://localhost:8010
 ```
 
 To check if the server is running and listening:
 
 ```bash
 # Check for running services on port 8000
-lsof -i :8000
+lsof -i :8010
 ```
 
 ---
