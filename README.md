@@ -113,6 +113,8 @@ sudo systemctl daemon-reload
 # Enable and start the service
 sudo systemctl enable mlite
 sudo systemctl start mlite
+
+# Check Status the service
 sudo systemctl status mlite
 ```
 
