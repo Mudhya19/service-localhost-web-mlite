@@ -113,6 +113,7 @@ sudo systemctl daemon-reload
 # Enable and start the service
 sudo systemctl enable mlite
 sudo systemctl start mlite
+sudo systemctl status mlite
 ```
 
 Check the network interface and access the server:
