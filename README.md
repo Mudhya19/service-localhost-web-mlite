@@ -59,6 +59,9 @@ php -S localhost:8000 -t /mnt/c/laragon/www/mlite-RSDS
 
 # Copy project folder in system linux
 cp -r /mnt/c/laragon/www/mlite-RSDS ~/mlite-RSDS
+
+# delete folder result copy in home
+rm -rf ~/mlite-master
 ```
 
 ---
