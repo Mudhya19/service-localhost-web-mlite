@@ -136,6 +136,19 @@ To check if the server is running and listening:
 ```bash
 # Check for running services on port 8000
 lsof -i :8010
+
+# Stop and nonaktif service
+sudo systemctl stop mlite-server.service
+sudo systemctl disable mlite-server.service
+
+# delete file service
+sudo rm /etc/systemd/system/mlite-server.service
+
+# Reload systemd
+sudo systemctl daemon-reload
+sudo systemctl reset-failed
+
+
 ```
 
 ---
