@@ -12,6 +12,9 @@ Begin by updating the system and installing necessary packages:
 # Update Ubuntu packages
 sudo apt update && sudo apt upgrade -y
 
+# Install Composer
+apt install composer -y
+
 # Install required PHP extensions and Apache server
 sudo apt install php-mysql
 sudo apt install php-gd
