@@ -12,11 +12,20 @@ Begin by updating the system and installing necessary packages:
 # Update Ubuntu packages
 sudo apt update && sudo apt upgrade -y
 
+# Install Composer
+apt install composer -y
+
 # Install required PHP extensions and Apache server
 sudo apt install php-mysql
+sudo apt install php-gd
 sudo apt install php8.3-curl
 sudo apt install apache2
 sudo apt install php-mbstring  # or php8.3-mbstring depending on your PHP version
+sudo apt install php
+sudo apt install php-cli
+sudo apt install php-common
+sudo apt install php-curl
+sudo apt install php-xml
 ```
 
 ---
@@ -50,6 +59,12 @@ cd /mnt/c/laragon/www/mlite-RSDS
 
 # Start PHP built-in server
 php -S localhost:8000 -t /mnt/c/laragon/www/mlite-RSDS
+
+# Copy project folder in system linux
+cp -r /mnt/c/laragon/www/mlite-RSDS ~/mlite-RSDS
+
+# delete folder result copy in home
+rm -rf ~/mlite-master
 ```
 
 ---
@@ -67,19 +82,29 @@ Paste the following content:
 
 ```ini
 [Unit]
-Description=mlite PHP server
+Description=mlite PHP Development Server
 After=network.target
 
 [Service]
-ExecStart=/usr/bin/php -S 0.0.0.0:8000 -t /mnt/c/laragon/www/mlite-RSDS
-WorkingDirectory=/mnt/c/laragon/www/mlite-RSDS
+Type=simple
+ExecStart=/usr/bin/php -S 0.0.0.0:8010 -t /root/mlite-master
+WorkingDirectory=/root/mlite-master
 Restart=always
-User=root  # or replace with your Ubuntu/WSL username
+RestartSec=5
+User=root
+Environment=APP_ENV=production
+
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=mlite
 
 [Install]
 WantedBy=multi-user.target
 ```
-
+Check Logs 
+```
+journalctl -u mlite.service -f
+```
 ---
 
 ## 5. Enabling and Managing the Service
@@ -94,6 +119,9 @@ sudo systemctl daemon-reload
 # Enable and start the service
 sudo systemctl enable mlite
 sudo systemctl start mlite
+
+# Check Status the service
+sudo systemctl status mlite
 ```
 
 Check the network interface and access the server:
@@ -103,14 +131,27 @@ Check the network interface and access the server:
 hostname -I
 
 # Access from browser:
-# http://<IP_WSL>:8000 or http://localhost:8000
+# http://<IP_WSL>:8010 or http://localhost:8010
 ```
 
 To check if the server is running and listening:
 
 ```bash
 # Check for running services on port 8000
-lsof -i :8000
+lsof -i :8010
+
+# Stop and nonaktif service
+sudo systemctl stop mlite-server.service
+sudo systemctl disable mlite-server.service
+
+# delete file service
+sudo rm /etc/systemd/system/mlite-server.service
+
+# Reload systemd
+sudo systemctl daemon-reload
+sudo systemctl reset-failed
+
+
 ```
 
 ---
